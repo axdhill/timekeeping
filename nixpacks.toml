@@ -2,17 +2,21 @@
 nixPkgs = ["nodejs-18_x", "postgresql"]
 
 [phases.install]
-cmds = ["npm ci", "cd client && npm ci && cd .."]
+cmds = [
+  "npm install --production=false",
+  "cd client && npm install --production=false && cd .."
+]
 
 [phases.build]
 cmds = [
   "npx prisma generate",
   "cd client && npm run build && cd ..",
-  "cp -r client/build ./public"
+  "mkdir -p public",
+  "cp -r client/build/* ./public/"
 ]
 
 [start]
-cmd = "npm start"
+cmd = "npx prisma migrate deploy && npm start"
 
 [variables]
 NODE_ENV = "production"

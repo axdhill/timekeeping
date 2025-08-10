@@ -9,7 +9,6 @@
     "client:dev": "cd client && npm start",
     "build": "cd client && npm run build && cp -r build ../public",
     "start": "node server/index.js",
-    "start:prod": "npx prisma migrate deploy && node server/index.js",
     "prisma:generate": "prisma generate",
     "prisma:migrate": "prisma migrate dev",
     "prisma:migrate:deploy": "prisma migrate deploy",
