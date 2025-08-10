@@ -19,7 +19,10 @@ interface AuthContextType {
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
-axios.defaults.baseURL = 'http://localhost:5001/api';
+// Configure axios base URL for development and production
+axios.defaults.baseURL = process.env.NODE_ENV === 'production' 
+  ? '/api'  // In production, use relative URL (same domain)
+  : 'http://localhost:5001/api';  // In development, use local server
 axios.defaults.withCredentials = true;
 
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {

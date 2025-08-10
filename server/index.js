@@ -1,6 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
+const path = require('path');
 const dotenv = require('dotenv');
 
 dotenv.config();
@@ -15,10 +16,19 @@ const reportRoutes = require('./routes/reports');
 const app = express();
 const PORT = process.env.PORT || 5001;
 
-app.use(cors({
-  origin: 'http://localhost:3000',
+// CORS configuration for development and production
+const corsOptions = {
+  origin: process.env.NODE_ENV === 'production' 
+    ? function(origin, callback) {
+        // Allow requests with no origin (like mobile apps or curl requests)
+        if (!origin) return callback(null, true);
+        return callback(null, true);
+      }
+    : 'http://localhost:3000',
   credentials: true
-}));
+};
+
+app.use(cors(corsOptions));
 app.use(express.json());
 app.use(cookieParser());
 
@@ -32,6 +42,16 @@ app.use('/api/reports', reportRoutes);
 app.get('/api/health', (req, res) => {
   res.json({ status: 'OK', timestamp: new Date().toISOString() });
 });
+
+// Serve static files from React build in production
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static(path.join(__dirname, '../public')));
+  
+  // Handle React routing, return all requests to React app
+  app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, '../public', 'index.html'));
+  });
+}
 
 app.use((err, req, res, next) => {
   console.error(err.stack);
