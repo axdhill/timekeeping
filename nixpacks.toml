@@ -11,8 +11,8 @@ cmds = [
 cmds = [
   "npx prisma generate",
   "cd client && npm run build && cd ..",
-  "mkdir -p public",
-  "cp -r client/build/* ./public/"
+  "rm -rf public",
+  "cp -r client/build ./public"
 ]
 
 [start]

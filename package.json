@@ -7,7 +7,7 @@
     "dev": "concurrently \"npm run server:dev\" \"npm run client:dev\"",
     "server:dev": "nodemon server/index.js",
     "client:dev": "cd client && npm start",
-    "build": "cd client && npm run build && cp -r build ../public",
+    "build": "cd client && npm run build && cd .. && rm -rf public && cp -r client/build public",
     "start": "node server/index.js",
     "prisma:generate": "prisma generate",
     "prisma:migrate": "prisma migrate dev",

@@ -45,10 +45,15 @@ app.get('/api/health', (req, res) => {
 
 // Serve static files from React build in production
 if (process.env.NODE_ENV === 'production') {
+  // Serve static files from public directory
   app.use(express.static(path.join(__dirname, '../public')));
   
-  // Handle React routing, return all requests to React app
+  // Handle React routing, return all non-API requests to React app
   app.get('*', (req, res) => {
+    // Don't serve index.html for API routes
+    if (req.path.startsWith('/api')) {
+      return res.status(404).json({ error: 'API endpoint not found' });
+    }
     res.sendFile(path.join(__dirname, '../public', 'index.html'));
   });
 }
