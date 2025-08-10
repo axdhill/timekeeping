@@ -53,21 +53,22 @@ interface EmployeeProjectBreakdown {
   totalHours: number;
 }
 
-interface SummaryData {
-  projects: Array<{
-    project: Project;
-    totalHours: number;
-  }>;
-  employees: Array<{
-    employee: Employee;
-    totalHours: number;
-  }>;
-  totalHours: number;
-  dateRange: {
-    startDate: string;
-    endDate: string;
-  };
-}
+// Commented out - not currently used but may be needed for future enhancements
+// interface SummaryData {
+//   projects: Array<{
+//     project: Project;
+//     totalHours: number;
+//   }>;
+//   employees: Array<{
+//     employee: Employee;
+//     totalHours: number;
+//   }>;
+//   totalHours: number;
+//   dateRange: {
+//     startDate: string;
+//     endDate: string;
+//   };
+// }
 
 const Reports: React.FC = () => {
   const [reportType, setReportType] = useState<'project-employee' | 'employee-project' | 'summary'>('project-employee');

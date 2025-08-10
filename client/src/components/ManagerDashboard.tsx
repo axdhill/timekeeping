@@ -28,7 +28,7 @@ interface PendingTimesheet {
 }
 
 const ManagerDashboard: React.FC = () => {
-  const { user } = useAuth();
+  const { } = useAuth(); // user not currently needed
   const [activeTab, setActiveTab] = useState<'approvals' | 'status'>('approvals');
   const [pendingTimesheets, setPendingTimesheets] = useState<PendingTimesheet[]>([]);
   const [selectedTimesheet, setSelectedTimesheet] = useState<PendingTimesheet | null>(null);

@@ -68,7 +68,7 @@ const TimesheetStatusMatrix: React.FC = () => {
 
   const formatWeekHeader = (startDate: string, endDate: string) => {
     const start = new Date(startDate);
-    const end = new Date(endDate);
+    // const end = new Date(endDate); // not currently used
     const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
     
     // Format as "Mon DD"

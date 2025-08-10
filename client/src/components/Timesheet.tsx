@@ -34,7 +34,7 @@ interface TimeRow {
 }
 
 const Timesheet: React.FC = () => {
-  const { user } = useAuth();
+  const { } = useAuth(); // user context available but not currently needed
   const [currentWeek, setCurrentWeek] = useState(new Date());
   const [timesheet, setTimesheet] = useState<TimesheetData | null>(null);
   const [projects, setProjects] = useState<Project[]>([]);
