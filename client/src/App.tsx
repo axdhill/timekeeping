@@ -25,7 +25,7 @@ const PrivateRoute: React.FC<{ children: React.ReactElement; roles?: string[] }>
 };
 
 const Navigation: React.FC = () => {
-  const { logout } = useAuth(); // user not currently needed in logout handler
+  const { user, logout } = useAuth();
 
   if (!user) return null;
 
